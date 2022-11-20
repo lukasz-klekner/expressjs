@@ -1,5 +1,11 @@
 const express = require('express')
 
-console.log('Welcome to nodejs and express!!! ')
-console.log(express())
+const app = express()
+
+app.get('/', (req, res) => {
+    const browserInfo = req.headers['user-agent']
+    res.send(browserInfo)
+})
+
+app.listen(3000)
 
