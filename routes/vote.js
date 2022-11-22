@@ -1,7 +1,8 @@
 const express = require('express')
+const { IpRestrict } = require('../utils/ipRestrict')
 
 const voteResults = {}
-let votedPeople = []
+const ipRestrict = new IpRestrict()
 
 const voteRouter = express.Router()
 
@@ -20,10 +21,9 @@ voteRouter
     const { ip } = req
     const { voteOption } = req.params
 
-    if(votedPeople.includes(ip)) {
+    if(!ipRestrict.check(ip)) {
         res.send('Nie możesz już glosować! Już to zrobiłeś!')
     } else {
-    votedPeople.push(ip)
     if(typeof voteResults[voteOption] === 'undefined'){
         voteResults[voteOption] = 0
     }
