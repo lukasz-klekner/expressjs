@@ -12,8 +12,6 @@ voteRouter
         <p>${voteName} --- ${voteCounter}</p>
     `).join('')
 
-    console.log(info)
-
     res.send(info)
 
 })
